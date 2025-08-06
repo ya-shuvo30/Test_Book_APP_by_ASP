@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Itransition_Intern\\Project_5\\FakeBookGenerator\\FakeBookGenerator.Shared\\FakeBookGenerator.Shared.csproj",
+      "projectUniqueName": "D:\\Itransition_Intern\\Project_5\\FakeBookGenerator.Shared\\FakeBookGenerator.Shared.csproj",
       "projectName": "FakeBookGenerator.Shared",
-      "projectPath": "D:\\Itransition_Intern\\Project_5\\FakeBookGenerator\\FakeBookGenerator.Shared\\FakeBookGenerator.Shared.csproj",
+      "projectPath": "D:\\Itransition_Intern\\Project_5\\FakeBookGenerator.Shared\\FakeBookGenerator.Shared.csproj",
       "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
-      "outputPath": "D:\\Itransition_Intern\\Project_5\\FakeBookGenerator\\FakeBookGenerator.Shared\\obj\\",
+      "outputPath": "D:\\Itransition_Intern\\Project_5\\FakeBookGenerator.Shared\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\hp\\AppData\\Roaming\\NuGet\\NuGet.Config"

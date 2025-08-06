@@ -2347,11 +2347,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Itransition_Intern\\Project_5\\FakeBookGenerator\\FakeBookGenerator.Client\\FakeBookGenerator.Client.csproj",
+      "projectUniqueName": "D:\\Itransition_Intern\\Project_5\\FakeBookGenerator.Client\\FakeBookGenerator.Client.csproj",
       "projectName": "FakeBookGenerator.Client",
-      "projectPath": "D:\\Itransition_Intern\\Project_5\\FakeBookGenerator\\FakeBookGenerator.Client\\FakeBookGenerator.Client.csproj",
+      "projectPath": "D:\\Itransition_Intern\\Project_5\\FakeBookGenerator.Client\\FakeBookGenerator.Client.csproj",
       "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
-      "outputPath": "D:\\Itransition_Intern\\Project_5\\FakeBookGenerator\\FakeBookGenerator.Client\\obj\\",
+      "outputPath": "D:\\Itransition_Intern\\Project_5\\FakeBookGenerator.Client\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\hp\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -2366,8 +2366,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\Itransition_Intern\\Project_5\\FakeBookGenerator\\FakeBookGenerator.Shared\\FakeBookGenerator.Shared.csproj": {
-              "projectPath": "D:\\Itransition_Intern\\Project_5\\FakeBookGenerator\\FakeBookGenerator.Shared\\FakeBookGenerator.Shared.csproj"
+            "D:\\Itransition_Intern\\Project_5\\FakeBookGenerator.Shared\\FakeBookGenerator.Shared.csproj": {
+              "projectPath": "D:\\Itransition_Intern\\Project_5\\FakeBookGenerator.Shared\\FakeBookGenerator.Shared.csproj"
             }
           }
         }

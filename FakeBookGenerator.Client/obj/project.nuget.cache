@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "pX0jTo3QsNY=",
+  "dgSpecHash": "qF7SY3FRCQA=",
   "success": true,
-  "projectFilePath": "D:\\Itransition_Intern\\Project_5\\FakeBookGenerator\\FakeBookGenerator.Client\\FakeBookGenerator.Client.csproj",
+  "projectFilePath": "D:\\Itransition_Intern\\Project_5\\FakeBookGenerator.Client\\FakeBookGenerator.Client.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\hp\\.nuget\\packages\\microsoft.aspnetcore.authorization\\8.0.10\\microsoft.aspnetcore.authorization.8.0.10.nupkg.sha512",
     "C:\\Users\\hp\\.nuget\\packages\\microsoft.aspnetcore.components\\8.0.10\\microsoft.aspnetcore.components.8.0.10.nupkg.sha512",

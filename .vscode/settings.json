@@ -1,0 +1,5 @@
+{
+    "appService.showDeployConfirmation": false,
+    "appService.defaultWebAppToDeploy": "/subscriptions/c1b2cb19-6780-439b-a22a-0088baabb406/resourceGroups/ItransitionGroup/providers/Microsoft.Web/sites/PROJECT5",
+    "appService.deploySubpath": "FakeBookGenerator.Server"
+}
