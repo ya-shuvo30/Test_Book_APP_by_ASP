@@ -1,0 +1,203 @@
+﻿@page "/"
+@using FakeBookGenerator.Shared
+@inject HttpClient Http
+@inject IJSRuntime JSRuntime
+
+<PageTitle>Fake Book Generator</PageTitle>
+
+<MudGrid Spacing="3">
+    @* --- CONTROL PANEL --- *@
+    <MudItem xs="12">
+        <MudPaper Class="pa-4">
+            <MudGrid>
+                <MudItem xs="12" sm="6" md="3">
+                    <MudSelect T="string" Label="Locale" @bind-Value="query.Locale" SelectedValuesChanged="OnQueryChanged">
+                        <MudSelectItem Value="@("en_US")">English (US)</MudSelectItem>
+                        <MudSelectItem Value="@("en_GB")">English (UK)</MudSelectItem>
+                        <MudSelectItem Value="@("de")">German</MudSelectItem>
+                        <MudSelectItem Value="@("fr")">French</MudSelectItem>
+                        <MudSelectItem Value="@("es")">Spanish</MudSelectItem>
+                        <MudSelectItem Value="@("it")">Italian</MudSelectItem>
+                        <MudSelectItem Value="@("ja")">Japanese</MudSelectItem>
+                    </MudSelect>
+                </MudItem>
+                <MudItem xs="12" sm="6" md="3">
+                    <MudNumericField Label="Seed" @bind-Value="query.Seed" Variant="Variant.Text" />
+                    <MudButton OnClick="RandomizeSeed" Size="Size.Small" Class="ml-2">Random</MudButton>
+                </MudItem>
+                <MudItem xs="12" sm="6" md="3">
+                    <MudText>Likes per Book (Avg: @($"{query.Likes:F1}"))</MudText>
+                    <MudSlider @bind-Value="query.Likes" Min="0" Max="1000" Step="0.1" />
+                </MudItem>
+                <MudItem xs="12" sm="6" md="3">
+                    <MudText>Reviews per Book (Avg: @($"{query.Reviews:F1}"))</MudText>
+                    <MudSlider @bind-Value="query.Reviews" Min="0" Max="10" Step="0.1" />
+                </MudItem>
+                 <MudItem xs="12" Class="d-flex justify-center">
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="() => OnQueryChanged()">Generate New Data</MudButton>
+                </MudItem>
+            </MudGrid>
+        </MudPaper>
+    </MudItem>
+
+    @* --- DATA TABLE --- *@
+    <MudItem xs="12">
+        @if (books is null)
+        {
+            <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+        }
+        else
+        {
+            <MudTable Items="@books" Hover="true" Breakpoint="Breakpoint.Sm"
+                      RowClass="cursor-pointer" OnRowClick="(TableRowClickEventArgs<Book> args) => ToggleRowDetails(args.Item!)">
+                <HeaderContent>
+                    <MudTh>#</MudTh>
+                    <MudTh>ISBN</MudTh>
+                    <MudTh>Title</MudTh>
+                    <MudTh>Author(s)</MudTh>
+                    <MudTh>Publisher</MudTh>
+                    <MudTh>Likes</MudTh>
+                </HeaderContent>
+                <RowTemplate>
+                    <MudTd DataLabel="#">@context.Id</MudTd>
+                    <MudTd DataLabel="ISBN">@context.Isbn</MudTd>
+                    <MudTd DataLabel="Title">@context.Title</MudTd>
+                    <MudTd DataLabel="Author(s)">@string.Join(", ", context.Authors.Select(a => a.FullName))</MudTd>
+                    <MudTd DataLabel="Publisher">@context.Publisher</MudTd>
+                    <MudTd DataLabel="Likes">@context.Likes</MudTd>
+                </RowTemplate>
+                <ChildRowContent>
+                    @if (expandedRows.Contains(context))
+                    {
+                        <MudTr>
+                            <td colspan="6">
+                                <MudCard Elevation="0" Class="pa-4 ma-2">
+                                    <MudCardHeader>
+                                        <CardHeaderContent>
+                                            <MudText Typo="Typo.h6">Reviews</MudText>
+                                        </CardHeaderContent>
+                                    </MudCardHeader>
+                                    <MudCardContent>
+                                        @if (context.Reviews.Any())
+                                        {
+                                            @foreach (var review in context.Reviews)
+                                            {
+                                                <MudText><b>@review.ReviewerName:</b> "@review.Text"</MudText>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <MudText>No reviews for this book.</MudText>
+                                        }
+                                    </MudCardContent>
+                                </MudCard>
+                            </td>
+                        </MudTr>
+                    }
+                </ChildRowContent>
+            </MudTable>
+        }
+    </MudItem>
+
+    @* --- ELEMENT TO OBSERVE FOR INFINITE SCROLL --- *@
+    <div @ref="loadMoreElement" class="mt-4"></div>
+</MudGrid>
+
+@code {
+    private List<Book>? books;
+    private BookQueryParameters query = new() { Likes = 100, Reviews = 2.5 };
+    private HashSet<Book> expandedRows = new();
+
+    // References for JavaScript interop
+    private ElementReference loadMoreElement;
+    private IJSObjectReference? module;
+    private DotNetObjectReference<Home>? objRef;
+
+    protected override async Task OnInitializedAsync()
+    {
+        objRef = DotNetObjectReference.Create(this);
+        RandomizeSeed();
+        await LoadBooks(true);
+    }
+
+    private async Task OnQueryChanged()
+    {
+        query.Page = 1;
+        await LoadBooks(true);
+    }
+
+    private void RandomizeSeed()
+    {
+        query.Seed = new Random().Next();
+    }
+
+    private async Task LoadBooks(bool resetList)
+    {
+        if (resetList)
+        {
+            books?.Clear();
+            expandedRows.Clear();
+            StateHasChanged(); // Update UI to show loading indicator
+        }
+
+        var queryString = $"locale={query.Locale}&seed={query.Seed}&likes={query.Likes}&reviews={query.Reviews}&page={query.Page}";
+        var newBooks = await Http.GetFromJsonAsync<List<Book>>($"api/books?{queryString}");
+        
+        if (newBooks != null)
+        {
+            if (resetList)
+            {
+                books = newBooks;
+            }
+            else
+            {
+                if (books == null)
+                {
+                    books = newBooks;
+                }
+                else
+                {
+                    books.AddRange(newBooks);
+                }
+            }
+            StateHasChanged();
+        }
+    }
+
+    // Method to be called from JavaScript when the observer triggers
+    [JSInvokable]
+    public async Task LoadMoreBooks()
+    {
+        query.Page++;
+        await LoadBooks(false);
+    }
+
+    private void ToggleRowDetails(Book book)
+    {
+        if (expandedRows.Contains(book))
+            expandedRows.Remove(book);
+        else
+            expandedRows.Add(book);
+    }
+
+    // Setup Intersection Observer for infinite scroll
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender && objRef != null)
+        {
+            module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/observer.js");
+            await module.InvokeVoidAsync("observe", loadMoreElement, objRef);
+        }
+    }
+
+    // Dispose of references to prevent memory leaks
+    public async ValueTask DisposeAsync()
+    {
+        if (module != null)
+        {
+            await module.InvokeVoidAsync("unobserve", loadMoreElement);
+            await module.DisposeAsync();
+        }
+        objRef?.Dispose();
+    }
+}

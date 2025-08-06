@@ -1,0 +1,11 @@
+D:\Itransition_Intern\Project_5\FakeBookGenerator\FakeBookGenerator.Shared\bin\Debug\net9.0\FakeBookGenerator.Shared.deps.json
+D:\Itransition_Intern\Project_5\FakeBookGenerator\FakeBookGenerator.Shared\bin\Debug\net9.0\FakeBookGenerator.Shared.dll
+D:\Itransition_Intern\Project_5\FakeBookGenerator\FakeBookGenerator.Shared\bin\Debug\net9.0\FakeBookGenerator.Shared.pdb
+D:\Itransition_Intern\Project_5\FakeBookGenerator\FakeBookGenerator.Shared\obj\Debug\net9.0\FakeBookGenerator.Shared.GeneratedMSBuildEditorConfig.editorconfig
+D:\Itransition_Intern\Project_5\FakeBookGenerator\FakeBookGenerator.Shared\obj\Debug\net9.0\FakeBookGenerator.Shared.AssemblyInfoInputs.cache
+D:\Itransition_Intern\Project_5\FakeBookGenerator\FakeBookGenerator.Shared\obj\Debug\net9.0\FakeBookGenerator.Shared.AssemblyInfo.cs
+D:\Itransition_Intern\Project_5\FakeBookGenerator\FakeBookGenerator.Shared\obj\Debug\net9.0\FakeBookGenerator.Shared.csproj.CoreCompileInputs.cache
+D:\Itransition_Intern\Project_5\FakeBookGenerator\FakeBookGenerator.Shared\obj\Debug\net9.0\FakeBookGenerator.Shared.dll
+D:\Itransition_Intern\Project_5\FakeBookGenerator\FakeBookGenerator.Shared\obj\Debug\net9.0\refint\FakeBookGenerator.Shared.dll
+D:\Itransition_Intern\Project_5\FakeBookGenerator\FakeBookGenerator.Shared\obj\Debug\net9.0\FakeBookGenerator.Shared.pdb
+D:\Itransition_Intern\Project_5\FakeBookGenerator\FakeBookGenerator.Shared\obj\Debug\net9.0\ref\FakeBookGenerator.Shared.dll
