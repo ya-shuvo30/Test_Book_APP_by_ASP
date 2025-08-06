@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "defaultProvider": "AzureDevOps",
+  "providers": [
+    {
+      "name": "AzureDevOps",
+      "handler": "AzureDevOps",
+      "configuration": {
+        "source": {
+          "repository": {
+            "url": "https://github.com/ya-shuvo30/Test_Book_APP_by_ASP.git",
+            "branch": "main",
+            "isManualIntegration": false,
+            "isGitHubAction": true
+          }
+        },
+        "build": {
+          "commands": [
+            "cd FakeBookGenerator.Server",
+            "dotnet restore",
+            "dotnet build --configuration Release",
+            "dotnet publish --configuration Release --output ./publish"
+          ]
+        }
+      }
+    }
+  ]
+}
